@@ -1,0 +1,18 @@
+.track-image {
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    object-position: center;
+}
+
+.track-image-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+
+    background: var(--text-secondary-color);
+    color: var(--bg-primary-color);
+
+    box-sizing: border-box;
+}

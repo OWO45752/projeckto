@@ -1,0 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=Red+Hat+Display:ital,wght@0,300..900;1,300..900&family=Red+Hat+Text:ital,wght@0,300..700;1,300..700&display=swap");
+
+html, body, #root {
+    margin: 0px;
+    padding: 0px;
+
+    width: 100vw;
+    max-width: 100vw;
+
+    height: 100vh;
+    max-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6, p, span, button {
+    margin: 0px;
+    padding: 0px;
+}

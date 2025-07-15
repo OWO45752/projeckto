@@ -1,0 +1,15 @@
+.layout-player {
+    grid-area: player;
+
+    box-sizing: border-box;
+    padding: 10px 24px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    flex-wrap: nowrap;
+    justify-content: space-between;
+
+    gap: 1rem;
+}

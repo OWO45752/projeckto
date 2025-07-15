@@ -1,0 +1,29 @@
+.layout-sidebar {
+    grid-area: sidebar-nav;
+
+    box-sizing: border-box;
+    margin-left: 24px;
+    padding-right: 12px;
+
+    overflow-y: scroll;
+    scrollbar-color: var(--scrollbar-secondary-color);
+}
+
+.sidebar-container {
+    box-sizing: border-box;
+
+    list-style-type: none;
+    margin: 0px;
+
+    width: 100%;
+    padding: 16px 0px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    > li {
+        display: block;
+        width: 100%;
+    }
+}

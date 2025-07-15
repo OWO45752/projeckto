@@ -1,0 +1,18 @@
+@import url("./light.css");
+
+:root {
+    /*
+    --global-title-font-family: "Red Hat Display", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    --global-font-family: "Red Hat Text", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    */
+    --global-title-font-family: "Red Hat Display", "RedHatDisplay", "Noto Sans Arabic", "Noto Sans Hebrew", "Noto Sans JP", "Noto Sans KR", "Noto Sans Malayalam", "Noto Sans SC", "Noto Sans TC", "Noto Sans Thai", Helvetica, Arial, sans-serif;
+    --global-font-family: "Red Hat Text", "RedHatText", "Noto Sans Arabic", "Noto Sans Hebrew", "Noto Sans JP", "Noto Sans KR", "Noto Sans Malayalam", "Noto Sans SC", "Noto Sans TC", "Noto Sans Thai", Helvetica, Arial, sans-serif;
+}
+
+body {
+    font-family: var(--global-font-family);
+
+    color: var(--text-primary-color);
+
+    user-select: none;
+}

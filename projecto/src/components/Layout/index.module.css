@@ -1,0 +1,36 @@
+.layout {
+    margin: 0px;
+    padding: 0px;
+
+    width: 100vw;
+    max-width: 100vw;
+
+    height: 100vh;
+    max-height: 100vh;
+    
+    background: var(--bg-secondary-color);
+
+    display: grid;
+
+    grid-template-areas: "header header header" "sidebar-nav content content" "player player player";
+
+    grid-template-rows: max-content 1fr 5.625rem;
+
+    grid-template-columns: 18.125rem 1fr 1fr;
+
+    &.sidebar-hidden {
+        grid-template-areas: "header header header" "content content content" "player player player";
+        grid-template-columns: 1fr 1fr 1fr;
+
+        > [woof-element--layout-name="sidebar"] {
+            display: none;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        > [woof-element--layout-name="content"] {
+            margin-left: 24px;
+            margin-right: 24px;
+        }
+    }
+}

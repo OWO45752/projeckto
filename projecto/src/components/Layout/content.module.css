@@ -1,0 +1,31 @@
+.layout-content {
+    grid-area: content;
+
+    display: flex;
+    flex-direction: column;
+
+    box-sizing: border-box;
+    height: 100%;
+    min-height: 0;
+
+    margin-right: 24px;
+    padding: 4px;
+
+    background: var(--bg-primary-color);
+
+    border: 1px solid var(--border-primary-color);
+    border-radius: 8px;
+}
+
+.content-container {
+    flex: 1;
+    
+    overflow-y: scroll;
+    scrollbar-color: var(--scrollbar-primary-color);
+
+    max-height: 100%;
+    padding: 12px;
+
+    display: flex;
+    flex-direction: column;
+}

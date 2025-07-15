@@ -1,0 +1,44 @@
+.player-control {
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+}
+
+
+
+.slider-container {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+}
+
+.slider-text {
+    width: max-content;
+    min-width: 2.5rem;
+    
+    &.l {
+        text-align: left;
+    }
+
+    &.r {
+        text-align: right;
+    }
+}
+
+
+
+
+.control-container {
+    flex: 1;
+
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 16px;
+}

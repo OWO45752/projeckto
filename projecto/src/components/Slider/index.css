@@ -1,0 +1,55 @@
+.miko-slider {
+    --k-slider-rail-color: var(--slider-rail-color-default);
+    --k-slider-track-color: var(--slider-track-color-default);
+    --k-slider-handle-color: var(--slider-handle-color-default);
+
+    &:hover {
+        --k-slider-rail-color: var(--slider-rail-color-hover);
+        --k-slider-track-color: var(--slider-track-color-hover);
+        --k-slider-handle-color: var(--slider-handle-color-hover);
+        
+        cursor: pointer;
+    }
+
+    &:active {
+        --k-slider-rail-color: var(--slider-rail-color-active);
+        --k-slider-track-color: var(--slider-track-color-active);
+        --k-slider-handle-color: var(--slider-handle-color-active);
+        
+        cursor: pointer;
+    }
+
+    .rc-slider-rail {
+        background-color: var(--k-slider-rail-color);
+    }
+
+    .rc-slider-track,
+    .rc-slider-tracks {
+        background-color: var(--k-slider-track-color);
+    }
+
+    .rc-slider-handle {
+        background-color: var(--k-slider-handle-color);
+        border: none;
+        opacity: 0;
+        cursor: default;
+        box-shadow: none;
+    }
+
+    .rc-slider-handle-dragging.rc-slider-handle-dragging.rc-slider-handle-dragging {
+        border: none;
+        box-shadow: none;
+        opacity: 1;
+    }
+
+    &:hover, &:active {
+        .rc-slider-handle {
+            opacity: 1;
+            cursor: pointer;
+        }
+
+        .rc-slider-handle-dragging.rc-slider-handle-dragging.rc-slider-handle-dragging {
+            opacity: 1;
+        }
+    }
+}
