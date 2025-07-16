@@ -1,6 +1,7 @@
 import csv
 from dataclasses import dataclass
 import os
+import shutil
 from typing import Optional
 from pathlib import Path
 import json
@@ -234,6 +235,9 @@ DATA_ARTIST_LIST = ArtistList()
 DATA_ALBUM_LIST = AlbumList()
 DATA_TRACK_LIST = TrackList()
 
+ensure_dir(DATA_ROOT_PATH)
+ensure_dir(OUTPUT_ROOT_PATH)
+
 #endregion DATA DIVISION
 
 
@@ -336,9 +340,13 @@ with open(TRACKS_FILE, mode="r", encoding="utf-8") as file:
 
 #TODO: Gen dir structures, Gen JSON, Copy media
 
-ensure_dir(resolve_output_path("api", strict=False))
-ensure_dir(resolve_output_path("api", AUDIO_DIR_NAME))
-ensure_dir(resolve_output_path("api", ARTWORK_DIR_NAME))
+NG_BASE_OUTPUT_PATH = resolve_output_path("api", strict=False)
+NG_AUDIO_OUTPUT_PATH = resolve_output_path("api", AUDIO_DIR_NAME)
+NG_ARTWORK_OUTPUT_PATH = resolve_output_path("api", ARTWORK_DIR_NAME)
+
+ensure_dir(NG_BASE_OUTPUT_PATH)
+ensure_dir(NG_AUDIO_OUTPUT_PATH)
+ensure_dir(NG_ARTWORK_OUTPUT_PATH)
 
 
 
@@ -413,5 +421,10 @@ for x in atrack:
 
 with open(resolve_output_path("api", "index.json"), mode="w", encoding="utf-8") as file:
     json.dump(data, file, indent=4)
+
+
+
+shutil.copytree(resolve_data_path(AUDIO_DIR_NAME), NG_AUDIO_OUTPUT_PATH, dirs_exist_ok=True)
+shutil.copytree(resolve_data_path(ARTWORK_DIR_NAME), NG_ARTWORK_OUTPUT_PATH, dirs_exist_ok=True)
 
 #endregion Prozesseng
