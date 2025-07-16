@@ -11,6 +11,7 @@ interface ContentStore {
     getAlbum: (id: string) => Album | null;
     getManyAlbum: (...ids: string[]) => Album[];
 
+    isReady: boolean;
 
     data: IFApiResponse | null;
     FVX_SET_DATA: (data: IFApiResponse) => void;
@@ -20,8 +21,9 @@ interface ContentStore {
 }
 
 export const useContentStore = create<ContentStore>((set, get) => ({
+    isReady: false,
     data: null,
-    FVX_SET_DATA: (data) => set({ data }),
+    FVX_SET_DATA: (data) => set({ data, isReady: true }),
 
 
     getTrack: (id) => {

@@ -1,6 +1,7 @@
 import type { Track } from "@miko/types";
 import { create } from "zustand";
 import { useContentStore } from "./useContentStore";
+import { useApplicationStore } from "./useApplicationStore";
 
 type RepeatMode = "off" | "one" | "all";
 
@@ -75,10 +76,12 @@ export const usePlayerStore = create<PlayerStore>((set, get) => ({
         if (!state.queue.includes(trackId)) {
             get().addTrackToQueue(trackId);
         }
-        const track = useContentStore.getState().getTrack(trackId);
-        if (track) set({ currentTrack: track, currentTime: 0 });
 
-        console.log(get().queue);
+        const track = useContentStore.getState().getTrack(trackId);
+        if (track) {
+            set({ currentTrack: track, currentTime: 0 });
+            useApplicationStore.getState().addRecentTrack(trackId);
+        }
     },
 
     setQueue: (trackIds: string[]) => set({ queue: trackIds }),
@@ -112,10 +115,7 @@ export const usePlayerStore = create<PlayerStore>((set, get) => ({
         }
 
         const nextTrackId = queue[nextIndex];
-        const nextTrack = useContentStore.getState().getTrack(nextTrackId);
-        if (nextTrack) {
-            set({ currentTrack: nextTrack, currentTime: 0 });
-        }
+        get().setCurrentTrack(nextTrackId);
     },
 
     autoNext: () => {
