@@ -7,10 +7,14 @@ import PlayerControl from "./control";
 import PlayerMisc from "./misc";
 
 // TODO: Work on this
-const LayoutPlayer = () => <div className={classes.layoutPlayer}>
-    <PlayerInfo />
-    <PlayerControl />
-    <PlayerMisc />
-</div>;
+const LayoutPlayer = () => {
+    return (
+        <div className={classes.layoutPlayer}>
+            <PlayerInfo />
+            <PlayerControl />
+            <PlayerMisc />
+        </div>
+    );
+};
 
 export default LayoutPlayer;

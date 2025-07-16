@@ -8,7 +8,6 @@ import { IconMenu2 } from "@tabler/icons-react";
 
 interface LayoutHeaderProps {
     onMenuButtonClick: () => void;
-    onProfileClick: () => void;
 }
 
 
@@ -20,7 +19,7 @@ const LayoutHeader = (props: LayoutHeaderProps) => <div className={classes.layou
     <p className={classes.headerBrand}>MIKO</p>
 
     <div className={classes.rhs}>
-        <img className={classes.profilePic} onClick={props.onProfileClick} src="/placeholder-profile.png" />
+        <img className={classes.profilePic} src="/placeholder-profile.png" />
     </div>
 </div>;
 

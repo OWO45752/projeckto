@@ -4,8 +4,8 @@
     - [x] Make Sidebar toggle work
     - [ ] **LATER**: Make Layout Player Misc section
 
-- [ ] Type definitions
-- [ ] Mock API (PT. 1)
+- [x] Type definitions
+- [x] Mock API (PT. 1)
     - [ ] Track
     - [ ] Album
     - [ ] Discover page

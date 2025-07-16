@@ -18,7 +18,7 @@ const Layout = () => {
 
     return (
         <div className={clsx(classes.layout, sidebarHidden && classes.sidebarHidden)}>
-            <LayoutHeader onMenuButtonClick={() => setSidebarHidden(!sidebarHidden)} onProfileClick={() => { /* TODO: Theme Switch */ }} />
+            <LayoutHeader onMenuButtonClick={() => setSidebarHidden(!sidebarHidden)} />
             <LayoutSidebar sidebarHidden={sidebarHidden}>
                 <SidebarButton>OWO</SidebarButton>
             </LayoutSidebar>
