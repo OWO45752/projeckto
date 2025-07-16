@@ -6,10 +6,13 @@ import PlayerInfo from "./info";
 import PlayerControl from "./control";
 import PlayerMisc from "./misc";
 
-// TODO: Work on this
+import Audio from "./audio";
+
 const LayoutPlayer = () => {
     return (
         <div className={classes.layoutPlayer}>
+            <Audio />
+
             <PlayerInfo />
             <PlayerControl />
             <PlayerMisc />

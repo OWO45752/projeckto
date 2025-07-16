@@ -23,7 +23,6 @@ export const useGetContentApi = () => {
                 setError(null);
             } catch(e) {
                 if ((e as Error).name === "AbortError") {
-                    console.log("Fetch aborted");
                     return;
                 }
                 setError(e as Error);

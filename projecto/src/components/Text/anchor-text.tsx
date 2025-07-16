@@ -10,7 +10,7 @@ import type { TextBoldStyleString, TextProps } from "./type";
 
 
 export type AnchorTextProps = Omit<TextProps, "as"> & {
-    href: string;
+    href?: string;
 };
 
 

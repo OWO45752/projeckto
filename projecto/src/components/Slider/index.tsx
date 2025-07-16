@@ -14,6 +14,8 @@ interface SliderProps {
     max?: number;
     className?: string;
     ref?: React.Ref<RCSliderRef>;
+    value?: number;
+    disabled?: boolean;
 }
 
 const Slider = (props: SliderProps) => <RCSlider
@@ -21,9 +23,13 @@ const Slider = (props: SliderProps) => <RCSlider
 
     onChangeComplete={props.onChangeComplete}
     onChange={props.onChange}
+
     min={props.min}
     max={props.max}
     ref={props.ref}
+
+    value={props.value}
+    disabled={props.disabled}
 />;
 
 export default Slider;

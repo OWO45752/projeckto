@@ -9,7 +9,6 @@ import LayoutHeader from "./header";
 import LayoutSidebar from "./sidebar";
 import LayoutPlayer from "./Player";
 import LayoutContent from "./content";
-import { SidebarButton } from "@components/Buttons/Sidebar";
 
 
 const Layout = () => {
@@ -19,9 +18,7 @@ const Layout = () => {
     return (
         <div className={clsx(classes.layout, sidebarHidden && classes.sidebarHidden)}>
             <LayoutHeader onMenuButtonClick={() => setSidebarHidden(!sidebarHidden)} />
-            <LayoutSidebar sidebarHidden={sidebarHidden}>
-                <SidebarButton>OWO</SidebarButton>
-            </LayoutSidebar>
+            <LayoutSidebar sidebarHidden={sidebarHidden} />
             <LayoutContent />
             <LayoutPlayer />
         </div>

@@ -4,18 +4,34 @@ import classes from "./info.module.css";
 
 import TrackImage from "@components/TrackImage";
 import { Text, AnchorText } from "@components/Text";
+import { usePlayerStore } from "@stores/usePlayerStore";
+import { useContentStore } from "@stores/useContentStore";
 
 
-const PlayerInfo = () => <div className={classes.playerInfo}>
-    <TrackImage src="/placeholder-track.webp" alt="owo" />
-    <div className={classes.info}>
-        <Text size="lg" bold className={classes.infoText}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit tempore veritatis quae fuga ex. Quam ab officiis alias sequi deserunt! Unde dicta sunt, minima dolore eum obcaecati vero sit nisi?</Text>
-        <Text size="sm">
-            <AnchorText href="/oow" className={classes.infoText}>UWU</AnchorText>
-            , <AnchorText href="/oow" className={classes.infoText}>UWU</AnchorText>
-            , <AnchorText href="/oow" className={classes.infoText}>UWU</AnchorText>
-        </Text>
-    </div>
-</div>;
+const PlayerInfo = () => {
+    const track = usePlayerStore((state) => state.currentTrack);
+    const getManyArtist = useContentStore((state) => state.getManyArtist);
+    const artists = track ? getManyArtist(...track.artist_ids) : [];
+
+    return (
+        <div className={classes.playerInfo}>
+            <TrackImage src={track?.artwork} alt={track?.title} />
+            <div className={classes.info}>
+                <Text size="lg" bold className={classes.infoText} >{track ? track.title : "No Playing"}</Text>
+                <Text size="sm">
+                    {artists.map((artist, i) =>
+                        <AnchorText
+                            key={artist.id}
+                            className={classes.infoText}
+                        >
+                            {artist.name}
+                            {i < artists.length - 1 ? ", " : ""}
+                        </AnchorText>
+                    )}
+                </Text>
+            </div>
+        </div>
+    );
+};
 
 export default PlayerInfo;

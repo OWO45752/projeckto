@@ -126,7 +126,9 @@ export default tseslint.config(
 
             "@stylistic/lines-around-comment": ["error", {
                 beforeBlockComment: true,
-                beforeLineComment: true
+                beforeLineComment: true,
+
+                allowBlockStart: true,
             }],
 
             "@stylistic/no-confusing-arrow": ["error", {

@@ -10,7 +10,7 @@
     - [ ] Album
     - [ ] Discover page
 
-- [ ] Setup Zustand 
+- [x] Setup Zustand 
 - [ ] Setup React Router 
 - [ ] Make other componenets (Cards, etc...)
 

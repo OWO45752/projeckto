@@ -13,6 +13,10 @@
     &:hover {
         cursor: pointer;
     }
+
+    &:disabled {
+        cursor: default;
+    }
 }
 
 
@@ -30,7 +34,7 @@
         border-color: var(--button1-border-color-hover);
     }
 
-    &:active {
+    &:active, &.active {
         color: var(--button1-text-color-active);
         background: var(--button1-bg-color-active);
         border-color: var(--button1-border-color-active);
@@ -58,7 +62,7 @@
         border-color: var(--button2-border-color-hover);
     }
 
-    &:active {
+    &:active, &.active {
         color: var(--button2-text-color-active);
         background: var(--button2-bg-color-active);
         border-color: var(--button2-border-color-active);
