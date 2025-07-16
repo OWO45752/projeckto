@@ -3,6 +3,7 @@ from dataclasses import dataclass
 import os
 from typing import Optional
 from pathlib import Path
+import json
 
 
 
@@ -11,9 +12,9 @@ from pathlib import Path
 TRACKS_FILE = "tracks.csv"
 ALBUMS_FILE = "albums.csv"
 
-OUTPUT_ROOT_PATH = "./output"
+OUTPUT_ROOT_PATH = str(Path("./output").resolve())
 
-DATA_ROOT_PATH = "./data_src"
+DATA_ROOT_PATH = str(Path("./data_src").resolve())
 ARTWORK_DIR_NAME = "ARTWORK"
 AUDIO_DIR_NAME = "AUDIO"
 ALBUM_DIR_NAME = "ALBUM"
@@ -57,8 +58,8 @@ class Log:
 
 
 
-def _resolve_path(base_dir: str, *target_path: str) -> str:
-    base = Path(base_dir).resolve(strict=True)
+def _resolve_path(base_dir: str, *target_path: str, strict:bool = True) -> str:
+    base = Path(base_dir).resolve(strict=strict)
     
     cleaned_parts = [p.lstrip("/\\") for p in target_path if p.strip() != ""]
     target = (base / Path(*cleaned_parts)).resolve(strict=False)
@@ -68,11 +69,11 @@ def _resolve_path(base_dir: str, *target_path: str) -> str:
 
     return str(target)
 
-def resolve_data_path(*paths: str) -> str:
-    return _resolve_path(DATA_ROOT_PATH, *paths)
+def resolve_data_path(*paths: str, strict: bool = True) -> str:
+    return _resolve_path(DATA_ROOT_PATH, *paths, strict=strict)
 
-def resolve_output_path(*paths: str) -> str:
-    return _resolve_path(OUTPUT_ROOT_PATH, *paths)
+def resolve_output_path(*paths: str, strict: bool = True) -> str:
+    return _resolve_path(OUTPUT_ROOT_PATH, *paths, strict=strict)
 
 
 
@@ -187,6 +188,42 @@ class TrackList:
     def all(self) -> list[Track]:
         return list(self._tracks)
 
+
+
+def _path_to_url(root: str, full_path: str, url_root: str = "") -> str:
+    """
+    Convert absolute file path to absolute URL path relative to a root.
+    
+    Example:
+    - root: "C:\\owo\\awa"
+    - full_path: "C:\\owo\\awa\\oof\\kwoski"
+    - url_root: "/owo"
+    - returns: "/owo/oof/kwoski"
+    """
+    # Normalize paths to avoid case and separator issues
+    root = os.path.normpath(root)
+    full_path = os.path.normpath(full_path)
+
+    # Check if full_path starts with root
+    if not os.path.commonpath([root, full_path]) == root:
+        raise ValueError("Full path is not within the root path")
+
+    # Get the relative path and convert to URL style
+    rel_path = rel_path = os.path.relpath(full_path, root).replace("\\", "/")
+
+    # Normalize and join the url_root and relative path
+    if url_root:
+        if not url_root.startswith("/"):
+            url_root = "/" + url_root
+        url_path = os.path.join(url_root, rel_path).replace("\\", "/")
+    else:
+        url_path = "/" + rel_path
+
+    return url_path
+
+def path_to_url(path: str, url_root: str = "") -> str:
+    return _path_to_url(DATA_ROOT_PATH, path, url_root)
+
 #endregion FUNCKS UND CLASSESE
 
 
@@ -221,6 +258,9 @@ def parseng_prc_artist(artists_str: str) -> list[Artist]:
     return artist_instances
 
 
+
+if not os.path.exists(DATA_ROOT_PATH):
+    raise OSError(f"Data Root Path: {DATA_ROOT_PATH} not exist")
 
 if not os.path.exists(TRACKS_FILE):
     raise OSError(f"Track file: {TRACKS_FILE} not exist")
@@ -295,5 +335,83 @@ with open(TRACKS_FILE, mode="r", encoding="utf-8") as file:
 #region Prozesseng
 
 #TODO: Gen dir structures, Gen JSON, Copy media
+
+ensure_dir(resolve_output_path("api", strict=False))
+ensure_dir(resolve_output_path("api", AUDIO_DIR_NAME))
+ensure_dir(resolve_output_path("api", ARTWORK_DIR_NAME))
+
+
+
+data = { # type: ignore
+    "tracks": {},
+    "albums": {},
+    "artists": {},
+    "v_featured": [],
+    "v_discover": [],
+}
+
+for x in DATA_TRACK_LIST.all():
+    xdata = { # type: ignore
+        "id": x.id,
+        "title": x.title,
+        "artist_ids": x.artist_ids,
+        "genres": x.genres,
+        "duration_ms": x.duration,
+        "stream": path_to_url(x.audio_file_path, "/api/"),
+        "artwork": path_to_url(x.art_file_path, "/api/")
+    }
+
+    data["tracks"][x.id] = xdata
+
+for x in DATA_ALBUM_LIST.all():
+    xtracks: list[str] = []
+    for xj in DATA_TRACK_LIST.get_by_album(x):
+        xtracks.append(xj.id)
+
+
+    xdata = { # type: ignore
+        "id": x.id,
+        "name": x.name,
+        "artist_ids": x.artists_id,
+        "artwork": path_to_url(x.art_file_path, "/api/"),
+        "track_ids": xtracks
+    }
+
+    data["albums"][x.id] = xdata
+
+for x in DATA_ARTIST_LIST.all():
+    xalbums: list[str] = []
+    for xf in DATA_ALBUM_LIST.get_by_artist(x):
+        xalbums.append(xf.id)
+
+    xtracks: list[str] = []
+    for xj in DATA_TRACK_LIST.get_by_artist(x):
+        xtracks.append(xj.id)
+
+    xdata = { # type: ignore
+        "id": x.id,
+        "name": x.name,
+        "album_ids": xalbums,
+        "track_ids": xtracks,
+    }
+
+    data["artists"][x.id] = xdata
+
+
+
+for r in range(1, 10):
+    x = DATA_TRACK_LIST.get_by_id(str(r))
+    if x:
+        data["v_featured"].append(x.id) # type: ignore
+
+atrack = DATA_TRACK_LIST.all()
+atrack.reverse()
+for x in atrack:
+    data["v_discover"].append(x.id) # type: ignore
+
+
+
+with open(resolve_output_path("api", "index.json"), mode="w", encoding="utf-8") as file:
+    json.dump(data, file, indent=4)
 
 #endregion Prozesseng
