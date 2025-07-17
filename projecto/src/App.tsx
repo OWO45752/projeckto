@@ -13,9 +13,15 @@ import Layout from "@components/Layout";
 import ApplicationError from "@pages/ApplicationError";
 import NotFound from "@pages/NotFound";
 
+
 import HomePage from "@pages/Home";
+
+import PlayQueuePage from "@pages/PlayQueue";
+import SettingsPage from "@pages/Settings";
+
 import TrackInfoPage from "@pages/TrackInfo";
 import AlbumInfoPage from "@pages/AlbumInfo";
+
 
 function App() {
     const loadApplicationStoreState = useApplicationStore(s => s.loadApplicationState);
@@ -40,6 +46,10 @@ function App() {
             <Routes>
                 <Route path="/" element={<Layout />}>
                     <Route index element={<HomePage />} />
+
+                    <Route path="play-queue" element={<PlayQueuePage />} />
+                    <Route path="settings" element={<SettingsPage />} />
+
 
                     <Route path="tracks/:trackId" element={<TrackInfoPage />} />
                     <Route path="albums/:albumId" element={<AlbumInfoPage />} />

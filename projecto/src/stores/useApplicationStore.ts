@@ -26,7 +26,7 @@ interface ApplicationStore {
 }
 
 const PRAM = {
-    themes: ["light"] as ThemeValues[],
+    themes: ["light", "dark"] as ThemeValues[],
 
     lsKeys: {
         theme: "WOOF__MIKO__APPLICATIONSTATE__APPLICATION_THEME",
@@ -41,13 +41,15 @@ export const useApplicationStore = create<ApplicationStore>((set, get) => ({
     setTheme: (theme) => {
         set({ currentTheme: theme });
         useLocalStorageStore.getState().set(PRAM.lsKeys.theme, theme);
+        document.body.setAttribute("theme", theme);
     },
     cycleTheme: () => {
         const { currentTheme } = get();
         const themes = PRAM.themes;
         const currentIndex = themes.indexOf(currentTheme);
         const nextIndex = (currentIndex + 1) % themes.length;
-        set({ currentTheme: themes[nextIndex] });
+
+        get().setTheme(themes[nextIndex]);
     },
     _loadTheme: () => {
         const theme = useLocalStorageStore.getState().get(PRAM.lsKeys.theme) as ThemeValues | null || "light";

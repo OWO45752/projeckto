@@ -1,5 +1,9 @@
 @import url("./light.css");
 
+@import url("./dark.css");
+
+
+
 :root {
     /*
     --global-title-font-family: "Red Hat Display", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;

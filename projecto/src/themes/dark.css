@@ -1,0 +1,60 @@
+/* TODO: Fix color */
+
+body[theme=dark] {
+    --brand-color: #3794ff;
+
+    --bg-primary-color: #1F1F1F;
+    --bg-secondary-color: #181818;
+
+    --border-primary-color: #2B2B2B;
+
+    --text-primary-color: #E6E6E6;
+    --text-secondary-color: #AAAAAA;
+
+    --scrollbar-primary-color: #2a2a2a var(--bg-primary-color);
+    --scrollbar-secondary-color: #2a2a2a var(--bg-secondary-color);
+
+    /* Button-1 */
+    --button1-bg-color-default: #3a3d41;
+    --button1-bg-color-hover: #444;
+    --button1-bg-color-active: #505050;
+    --button1-bg-color-disabled: #2d2d2d;
+
+    --button1-border-color-default: #444;
+    --button1-border-color-hover: #555;
+    --button1-border-color-active: #666;
+    --button1-border-color-disabled: #2a2a2a;
+
+    --button1-text-color-default: var(--text-primary-color);
+    --button1-text-color-hover: var(--text-primary-color);
+    --button1-text-color-active: var(--text-primary-color);
+    --button1-text-color-disabled: #666;
+
+    /* Button-2 */
+    --button2-bg-color-default: var(--bg-secondary-color);
+    --button2-bg-color-hover: #333;
+    --button2-bg-color-active: #444;
+    --button2-bg-color-disabled: #2d2d2d;
+
+    --button2-text-color-default: var(--text-primary-color);
+    --button2-text-color-hover: var(--text-primary-color);
+    --button2-text-color-active: var(--text-primary-color);
+    --button2-text-color-disabled: #666;
+
+    /* Slider */
+    --slider-rail-color-default: #3c3c3c;
+    --slider-track-color-default: var(--brand-color);
+    --slider-handle-color-default: transparent;
+
+    --slider-rail-color-hover: #3c3c3c;
+    --slider-track-color-hover: var(--brand-color);
+    --slider-handle-color-hover: #d4d4d4;
+
+    --slider-rail-color-active: #3c3c3c;
+    --slider-track-color-active: var(--brand-color);
+    --slider-handle-color-active: #d4d4d4;
+
+    --slider-rail-color-disabled: #2d2d2d;
+    --slider-track-color-disabled: #555;
+    --slider-handle-color-disabled: transparent;
+}

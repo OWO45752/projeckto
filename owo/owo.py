@@ -420,7 +420,8 @@ for x in atrack:
 
 
 with open(resolve_output_path("api", "index.json"), mode="w", encoding="utf-8") as file:
-    json.dump(data, file, indent=4)
+    # json.dump(data, file, indent=4)
+    json.dump(data, file)
 
 
 

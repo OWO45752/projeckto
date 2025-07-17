@@ -13,7 +13,7 @@ const LayoutContentLoading = () => <div className={classes.loadingContainer}>
             as="h1"
             className={classes.loadingText}
             variant="primary"
-            style={{ background: "#ffffff", padding: "0px 8px" }}
+            style={{ background: "var(--bg-primary-color)", padding: "0px 8px" }}
         >
             Loading
         </Text>

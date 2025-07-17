@@ -20,14 +20,24 @@ const Audio = () => {
         audioSeekTimeValue,
 
         autoNext,
+
+        volume,
     } = usePlayerStore();
 
     const howlerRef = React.useRef<ReactHowler | null>(null);
+
+
+    //
+
 
     const audioOnLoad = () => {
         setAudioLoaded(true);
         play();
     };
+
+
+    //
+
 
     React.useEffect(() => {
         if (!isPlaying || !audioLoaded) return;
@@ -42,6 +52,7 @@ const Audio = () => {
         return () => clearInterval(interval);
     }, [audioLoaded, isPlaying, setCurrentTime]);
 
+
     React.useEffect(() => {
         if (!howlerRef.current || audioSeekTimeValue === null) return;
 
@@ -49,6 +60,10 @@ const Audio = () => {
         setAudioSeekTimeValue(null);
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [ audioSeekTimeValue ]);
+
+
+    //
+
 
     if (!currentTrack) return <></>;
 
@@ -68,6 +83,7 @@ const Audio = () => {
                 onEnd={() => autoNext()}
 
                 playing={isPlaying}
+                volume={volume}
             />
         </div>
     );

@@ -3,7 +3,6 @@
 
     --bg-primary-color: #FBFBFB;
     --bg-secondary-color: #F3F3F4;
-    --bg-tertiary-color: #F3F3F4;
 
     --border-primary-color: #D9D9DC;
     
@@ -33,7 +32,7 @@
     --button1-text-color-disabled: #A3A3A3;
     
     /* Button-2 */
-    --button2-bg-color-default: #F3F3F4;
+    --button2-bg-color-default: var(--bg-secondary-color);
     --button2-bg-color-hover: #EAEAEC;
     --button2-bg-color-active: #D9D9DC;
     --button2-bg-color-disabled: #C7C7C7;

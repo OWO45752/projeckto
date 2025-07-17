@@ -17,9 +17,10 @@ interface PlayerStore {
     play: () => void;
     pause: () => void;
     togglePlay: () => void;
+    setCurrentTrack: (trackId: string) => void;
+    unplay: () => void;
     setCurrentTime: (t: number) => void;
 
-    setCurrentTrack: (trackId: string) => void;
 
     setQueue: (trackIds: string[]) => void;
     addTrackToQueue: (trackId: string) => void;
@@ -69,8 +70,6 @@ export const usePlayerStore = create<PlayerStore>((set, get) => ({
         }
     },
 
-    setCurrentTime: (t) => set({ currentTime: t }),
-
     setCurrentTrack: (trackId: string) => {
         const state = get();
 
@@ -88,14 +87,41 @@ export const usePlayerStore = create<PlayerStore>((set, get) => ({
         }
     },
 
+    unplay: () => set({ currentTrack: null, isPlaying: false, currentTime: 0 }),
+
+    setCurrentTime: (t) => set({ currentTime: t }),
+
     setQueue: (trackIds: string[]) => set({ queue: trackIds }),
     addTrackToQueue: (trackId) => {
         if (get().queue.includes(trackId)) return;
         set((s) => ({ queue: [...s.queue, trackId] }));
     },
-    removeTrackFromQueue: (trackId) => set((s) => ({
-        queue: s.queue.filter((id) => id !== trackId),
-    })),
+    removeTrackFromQueue: (trackId) => {
+        const state = get();
+        const newQueue = state.queue.filter((id) => id !== trackId);
+
+        const isCurrent = state.currentTrack?.id === trackId;
+
+        // If the current track is being removed
+        if (isCurrent) {
+            if (newQueue.length > 0) {
+                // Pick next track, or first if current was last
+                const currentIndex = state.queue.indexOf(trackId);
+                const nextIndex = Math.min(currentIndex, newQueue.length - 1);
+                const nextTrackId = newQueue[nextIndex];
+                get().setCurrentTrack(nextTrackId);
+            } else {
+                // No tracks left
+                get().unplay();
+                set({ queue: [] });
+                return;
+            }
+        }
+
+        // Just update queue if not current track
+        set({ queue: newQueue });
+    },
+
 
     next: () => {
         const { currentTrack, queue, repeatMode } = get();
