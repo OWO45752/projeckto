@@ -36,7 +36,6 @@ const Audio = () => {
             if (howlerRef.current) {
                 const time = howlerRef.current.seek();
                 setCurrentTime(time * 1000);
-                console.log(time);
             }
         }, 150);
 

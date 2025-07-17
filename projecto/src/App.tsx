@@ -15,6 +15,7 @@ import NotFound from "@pages/NotFound";
 
 import HomePage from "@pages/Home";
 import TrackInfoPage from "@pages/TrackInfo";
+import AlbumInfoPage from "@pages/AlbumInfo";
 
 function App() {
     const loadApplicationStoreState = useApplicationStore(s => s.loadApplicationState);
@@ -41,6 +42,7 @@ function App() {
                     <Route index element={<HomePage />} />
 
                     <Route path="tracks/:trackId" element={<TrackInfoPage />} />
+                    <Route path="albums/:albumId" element={<AlbumInfoPage />} />
 
 
                     <Route path="*" element={<NotFound />} />

@@ -126,8 +126,6 @@ export const usePlayerStore = create<PlayerStore>((set, get) => ({
         const { queue, currentTrack, repeatMode, isShuffle } = get();
         if (!currentTrack || queue.length === 0) return;
 
-        console.log(queue);
-
         const isLastTrack = queue[queue.length - 1] === currentTrack.id;
 
         if (repeatMode === "off") {

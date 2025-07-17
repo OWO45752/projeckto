@@ -30,8 +30,9 @@ const TrackInfoPage = () => {
                 />
 
                 <TrackMetaInfo
-                    artistIds={track.artist_ids}
                     trackId={track.id}
+                    title={track.title}
+                    artistIds={track.artist_ids}
                     duration={track.duration_ms}
                 />
             </div>

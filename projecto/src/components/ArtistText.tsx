@@ -3,9 +3,11 @@ import React from "react";
 import type { Artist } from "@miko/types";
 
 import { AnchorText, Text } from "./Text";
+import { useContentStore } from "@stores/useContentStore";
 
 interface ArtistTextProps {
-    artists: Artist[];
+    artistIds?: string[];
+    artists?: Artist[];
     className?: string;
     size?: "lg" | "md" | "sm";
     limit?: number;
@@ -13,15 +15,27 @@ interface ArtistTextProps {
 }
 
 const ArtistText = (props: ArtistTextProps) => {
+    const getManyArtists = useContentStore(s => s.getManyArtist);
+
     const variant = props.variant || "secondary";
 
-    if (props.limit && props.artists.length > props.limit) return (
+    const artists = React.useMemo(() => {
+        if (props.artists) return props.artists;
+
+        if (!props.artistIds) return [];
+
+        return getManyArtists(...props.artistIds);
+    }, [props.artistIds, props.artists, getManyArtists]);
+
+    if (artists.length === 0) return <></>;
+
+    if (props.limit && artists.length > props.limit) return (
         <Text as="p" size={props.size} variant={variant} className={props.className}>Various Artists</Text>
     );
 
     return (
         <>
-            {props.artists.map((artist, i) =>
+            {artists.map((artist, i) =>
                 <AnchorText
                     key={artist.id}
                     className={props.className}
@@ -29,7 +43,7 @@ const ArtistText = (props: ArtistTextProps) => {
                     size={props.size}
                 >
                     {artist.name}
-                    {i < props.artists.length - 1 ? ", " : ""}
+                    {i < artists.length - 1 ? ", " : ""}
                 </AnchorText>
             )}
         </>

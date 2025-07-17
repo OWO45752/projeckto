@@ -23,7 +23,7 @@ const HomePage = () => {
 
             <div />
 
-            {featuredTrackIds && <TrackCardSection title="Featured" trackIds={featuredTrackIds} loading="lazy" />}
+            {featuredTrackIds && <TrackCardSection title="Featured" trackIds={featuredTrackIds} />}
 
             <div />
 

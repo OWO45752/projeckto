@@ -16,6 +16,7 @@ import { IconPlayerPlayFilled } from "@tabler/icons-react";
 
 interface TrackMetaInfoProps {
     trackId: string;
+    title: string;
     artistIds: string[];
     duration: number;
 }
@@ -28,7 +29,7 @@ const TrackMetaInfo = (props: TrackMetaInfoProps) => {
 
     return (
         <div className={classes.trackMetaInfo}>
-            <Text as="h1" bold>C U Again</Text>
+            <Text as="h1" bold>{props.title}</Text>
 
             <div>
                 <ArtistText artists={artists} size="lg" />

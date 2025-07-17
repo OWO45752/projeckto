@@ -2,12 +2,12 @@ import React from "react";
 
 import { usePlayerStore } from "@stores/usePlayerStore";
 import { useContentStore } from "@stores/useContentStore";
+import { useNavigate } from "react-router";
 
 import { Text } from "@components/Text";
 import { TrackCard } from "@components/Card/Card";
 
 import classes from "./index.module.css";
-import { useNavigate } from "react-router";
 
 interface CardSectionProps {
     title: string;
@@ -37,7 +37,7 @@ const TrackCardSection = (props: CardSectionProps) => {
                             artSrc={t.artwork}
 
                             onPlayClick={() => playTrack(t.id)}
-                            onTitleClick={() => navigate({ pathname: `/tracks/${t.id}` })}
+                            onTitleClick={() => navigate(`/tracks/${t.id}`)}
 
                             artLoading={props.loading}
                         />

@@ -5,7 +5,7 @@ import { useApplicationStore } from "@stores/useApplicationStore";
 import { usePlayerStore } from "@stores/usePlayerStore";
 
 import { Text } from "@components/Text";
-import RecentCard from "@components/Card/RecentCard";
+import { WidePlayCard } from "@components/Card/Wide";
 
 import classes from "./index.module.css";
 
@@ -23,11 +23,13 @@ const RecentTrackSection = () => {
             <Text as="h1" bold>Recents</Text>
             <div className={classes.recentSection}>
                 {recentTracks.map((t) =>
-                    <RecentCard
-                        key={t.id} // make sure each card has a unique key!
+                    <WidePlayCard
+                        key={t.id}
                         src={t.artwork}
                         title={t.title}
                         onPlayButtonClick={() => playTrack(t.id)}
+
+                        solid
                     />
                 )}
             </div>

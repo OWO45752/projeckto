@@ -1,0 +1,44 @@
+.wide-card {
+    box-sizing: border-box;
+
+    flex: 1;
+    height: 3rem;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    
+    border-radius: 8px;
+
+    background: var(--bg-primary-color);
+
+    &.solid {
+        background: var(--bg-secondary-color);
+    }
+
+    &:hover {
+        background: var(--bg-secondary-color);
+    }
+
+    &.active {
+        background: var(--border-primary-color);
+    }
+}
+
+.text-container {
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.button-container {
+    box-sizing: border-box;
+    height: 3rem;
+
+    padding: 0.5rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
