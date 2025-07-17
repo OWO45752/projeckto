@@ -30,7 +30,7 @@ const Audio = () => {
 
     React.useEffect(() => {
         const interval = setInterval(() => {
-            if (howlerRef.current) {
+            if (howlerRef.current && isPlaying) {
                 const time = howlerRef.current.seek();
                 setCurrentTime(time * 1000);
             }

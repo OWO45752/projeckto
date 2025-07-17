@@ -14,7 +14,8 @@ interface ContentStore {
     isReady: boolean;
 
     data: IFApiResponse | null;
-    FVX_SET_DATA: (data: IFApiResponse) => void;
+    error: Error | null;
+    FVX_SET_DATA: (data: IFApiResponse | null, error: Error | null) => void;
 
     getFeaturedTracks: () => Track[] | null;
     getDiscoverTracks: () => Track[] | null;
@@ -23,7 +24,8 @@ interface ContentStore {
 export const useContentStore = create<ContentStore>((set, get) => ({
     isReady: false,
     data: null,
-    FVX_SET_DATA: (data) => set({ data, isReady: true }),
+    error: null,
+    FVX_SET_DATA: (data, error = null) => set({ data, error: error, isReady: error === null }),
 
 
     getTrack: (id) => {
