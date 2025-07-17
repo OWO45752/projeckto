@@ -1,8 +1,13 @@
 import React from "react";
 
 import classes from "./sidebar.module.css";
-import { SidebarButton } from "@components/Buttons/Sidebar";
-import { usePlayerStore } from "@stores/usePlayerStore";
+import { SidebarNavButton } from "@components/Buttons/Sidebar";
+
+import {
+    IconHome2,
+    IconList,
+    IconSettings2
+} from "@tabler/icons-react";
 
 interface LayoutSidebarProps {
     sidebarHidden: boolean;
@@ -10,21 +15,28 @@ interface LayoutSidebarProps {
 
 
 const LayoutSidebar = (props: LayoutSidebarProps) => {
-    const setCurrentTrack = usePlayerStore((s) => s.setCurrentTrack);
-    const addTTQ = usePlayerStore((s) => s.addTrackToQueue);
-
-    addTTQ("5");
-    addTTQ("64");
-    addTTQ("67");
-    addTTQ("32");
-
     if (props.sidebarHidden) return <></>;
 
     return (
         <nav className={classes.layoutSidebar} woof-element--layout-name="sidebar">
             <ul className={classes.sidebarContainer}>
-                <SidebarButton onClick={() => setCurrentTrack("10")}>AWA</SidebarButton>
-                <SidebarButton onClick={() => setCurrentTrack("1")}>OWO</SidebarButton>
+                <SidebarNavButton to="/">
+                    <IconHome2 size="1em" />
+                    Home
+                </SidebarNavButton>
+
+                <SidebarNavButton to="/play-queue">
+                    <IconList size="1em" />
+                    Play Queue
+                </SidebarNavButton>
+
+
+                <div className={classes.scLow}>
+                    <SidebarNavButton to="/settings">
+                        <IconSettings2 size="1em" />
+                        Settings
+                    </SidebarNavButton>
+                </div>
             </ul>
         </nav>
     );

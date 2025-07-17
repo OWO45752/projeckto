@@ -73,12 +73,16 @@ export const usePlayerStore = create<PlayerStore>((set, get) => ({
 
     setCurrentTrack: (trackId: string) => {
         const state = get();
+
+        if (trackId === state.currentTrack?.id) return;
+
         if (!state.queue.includes(trackId)) {
             get().addTrackToQueue(trackId);
         }
 
         const track = useContentStore.getState().getTrack(trackId);
         if (track) {
+            get().setAudioLoaded(false);
             set({ currentTrack: track, currentTime: 0 });
             useApplicationStore.getState().addRecentTrack(trackId);
         }
@@ -171,10 +175,7 @@ export const usePlayerStore = create<PlayerStore>((set, get) => ({
         }
 
         const prevTrackId = queue[prevIndex];
-        const prevTrack = useContentStore.getState().getTrack(prevTrackId);
-        if (prevTrack) {
-            set({ currentTrack: prevTrack, currentTime: 0 });
-        }
+        get().setCurrentTrack(prevTrackId);
     },
 
     setVolume: (value: number) => {

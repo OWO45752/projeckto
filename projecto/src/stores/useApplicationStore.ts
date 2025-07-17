@@ -22,6 +22,7 @@ interface ApplicationStore {
 
     // run `_load` functions;
     loadApplicationState: () => void;
+    isReady: boolean;
 }
 
 const PRAM = {
@@ -56,7 +57,11 @@ export const useApplicationStore = create<ApplicationStore>((set, get) => ({
     recentTrackIds: [],
     addRecentTrack: (trackId) => {
         const { recentTrackIds } = get();
-        if (recentTrackIds.includes(trackId)) return;
+
+        if (recentTrackIds.includes(trackId)) {
+            const tindex = recentTrackIds.indexOf(trackId);
+            recentTrackIds.splice(tindex, 1);
+        }
 
         const updated = [trackId, ...recentTrackIds.filter(id => id !== trackId)].slice(0, 4);
         useLocalStorageStore.getState().set(PRAM.lsKeys.recentTracks, JSON.stringify(updated));
@@ -85,5 +90,8 @@ export const useApplicationStore = create<ApplicationStore>((set, get) => ({
         const state = get();
 
         state._loadRecentTrackIds();
+
+        set({ isReady: true });
     },
+    isReady: false,
 }));

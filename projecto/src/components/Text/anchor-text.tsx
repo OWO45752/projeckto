@@ -31,6 +31,7 @@ const AnchorText = (props: AnchorTextProps) => {
             italic && classes.italic,
             bold && classes[bold],
             size && classes[size],
+            !props.href && classes.noClick,
             props.className
         )}
         style={props.style}

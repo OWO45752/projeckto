@@ -15,6 +15,7 @@ type TextProps = React.PropsWithChildren<{
     className?: string;
     size?: "lg" | "md" | "sm";
     style?: React.CSSProperties;
+    onClick?: () => void;
 }>;
 
 
@@ -35,10 +36,13 @@ const Text = (props: TextProps) => {
             italic && classes.italic,
             bold && classes[bold],
             size && classes[size],
+            props.onClick && classes.clickable,
             props.className
         )}
 
         style={props.style}
+
+        onClick={props.onClick}
     >
         {props.children}
     </Component>;

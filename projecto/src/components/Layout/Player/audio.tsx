@@ -8,6 +8,7 @@ const Audio = () => {
     const {
         currentTrack,
 
+        audioLoaded,
         setAudioLoaded,
 
         isPlaying,
@@ -29,16 +30,18 @@ const Audio = () => {
     };
 
     React.useEffect(() => {
+        if (!isPlaying || !audioLoaded) return;
+
         const interval = setInterval(() => {
-            if (howlerRef.current && isPlaying) {
+            if (howlerRef.current) {
                 const time = howlerRef.current.seek();
                 setCurrentTime(time * 1000);
+                console.log(time);
             }
         }, 150);
 
         return () => clearInterval(interval);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [audioLoaded, isPlaying, setCurrentTime]);
 
     React.useEffect(() => {
         if (!howlerRef.current || audioSeekTimeValue === null) return;

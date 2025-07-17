@@ -10,14 +10,14 @@ import { IconPlayerPlayFilled } from "@tabler/icons-react";
 interface RecentCardProps {
     src: string
     title: string
-    onClick?: () => void;
+    onPlayButtonClick?: () => void;
 }
 
 const RecentCard = (props: RecentCardProps) => <div className={classes.recentCard} >
     <TrackImage src={props.src} size="3rem" />
     <Text bold style={{ flex: 1 }}>{props.title}</Text>
     <div className={classes.buttonContainer}>
-        <RegularButton>
+        <RegularButton onClick={props.onPlayButtonClick} variant="2">
             <IconPlayerPlayFilled size="1em" />
         </RegularButton>
     </div>

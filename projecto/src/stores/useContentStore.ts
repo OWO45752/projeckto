@@ -17,15 +17,34 @@ interface ContentStore {
     error: Error | null;
     FVX_SET_DATA: (data: IFApiResponse | null, error: Error | null) => void;
 
+
+    //
+
+
     getFeaturedTracks: () => Track[] | null;
+    getFeaturedTrackIds: () => string[] | null;
+
     getDiscoverTracks: () => Track[] | null;
+    getDiscoverTrackIds: () => string[] | null;
+
+
+    //
+
+
+    getAllTrackIds: () => string[] | null;
+
+    getAllAlbumIds: () => string[] | null;
 }
 
 export const useContentStore = create<ContentStore>((set, get) => ({
     isReady: false,
     data: null,
     error: null,
-    FVX_SET_DATA: (data, error = null) => set({ data, error: error, isReady: error === null }),
+    FVX_SET_DATA: (data, error = null) => set({
+        data,
+        error: error,
+        isReady: error === null && data !== null
+    }),
 
 
     getTrack: (id) => {
@@ -78,6 +97,9 @@ export const useContentStore = create<ContentStore>((set, get) => ({
     },
 
 
+    //
+
+
     getFeaturedTracks: () => {
         const gdata = get();
         if (gdata.data === null) return null;
@@ -92,6 +114,16 @@ export const useContentStore = create<ContentStore>((set, get) => ({
         return tracks;
     },
 
+    getFeaturedTrackIds: () => {
+        const gdata = get();
+        if (gdata.data === null) return null;
+        return gdata.data.v_featured;
+    },
+
+
+    //
+
+
     getDiscoverTracks: () => {
         const gdata = get();
         if (gdata.data === null) return null;
@@ -104,5 +136,27 @@ export const useContentStore = create<ContentStore>((set, get) => ({
         }
 
         return tracks;
+    },
+
+    getDiscoverTrackIds: () => {
+        const gdata = get();
+        if (gdata.data === null) return null;
+        return gdata.data.v_discover;
+    },
+
+
+    //
+
+
+    getAllTrackIds: () => {
+        const gdata = get();
+        if (gdata.data === null) return null;
+        return Object.keys(gdata.data.tracks);
+    },
+
+    getAllAlbumIds: () => {
+        const gdata = get();
+        if (gdata.data === null) return null;
+        return Object.keys(gdata.data.albums);
     },
 }));

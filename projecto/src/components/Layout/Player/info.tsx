@@ -1,11 +1,14 @@
 import React from "react";
 
-import classes from "./info.module.css";
-
-import TrackImage from "@components/TrackImage";
-import { Text, AnchorText } from "@components/Text";
+import { Text } from "@components/Text";
 import { usePlayerStore } from "@stores/usePlayerStore";
 import { useContentStore } from "@stores/useContentStore";
+
+import TrackImage from "@components/TrackImage";
+
+import ArtistText from "@components/ArtistText";
+
+import classes from "./info.module.css";
 
 
 const PlayerInfo = () => {
@@ -18,17 +21,9 @@ const PlayerInfo = () => {
             <TrackImage src={track?.artwork} alt={track?.title} />
             <div className={classes.info}>
                 <Text size="lg" bold className={classes.infoText} >{track ? track.title : "No Playing"}</Text>
-                <Text size="sm">
-                    {artists.map((artist, i) =>
-                        <AnchorText
-                            key={artist.id}
-                            className={classes.infoText}
-                        >
-                            {artist.name}
-                            {i < artists.length - 1 ? ", " : ""}
-                        </AnchorText>
-                    )}
-                </Text>
+                <div>
+                    <ArtistText artists={artists} className={classes.infoText} limit={5} />
+                </div>
             </div>
         </div>
     );

@@ -1,0 +1,14 @@
+.track-meta {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: nowrap;
+
+    gap: 2rem;
+}
+
+.track-meta-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}

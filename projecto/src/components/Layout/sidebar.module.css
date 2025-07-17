@@ -15,14 +15,26 @@
     list-style-type: none;
     margin: 0px;
 
+    height: 100%;
     width: 100%;
     padding: 16px 0px;
 
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 0.5rem;
 
-    > li {
+    > .sc-low {
+        height: 100%;
+        width: 100%;
+
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    > li, > .sc-low > li {
         display: block;
         width: 100%;
     }

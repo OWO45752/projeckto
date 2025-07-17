@@ -12,6 +12,7 @@ interface TrackImageProps {
     alt?: string;
     size?: number | string;
     borderRadius?: number | string;
+    loading?: "eager" | "lazy"
 }
 
 
@@ -31,6 +32,7 @@ const TrackImage = (props: TrackImageProps) => {
             style={style}
             src={props.src}
             alt={props.alt}
+            loading={props.loading}
         />
     );
     else return (

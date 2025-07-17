@@ -8,6 +8,10 @@
     font-family: var(--global-font-family);
     color: var(--text-primary-color);
 
+    &.clickable:hover {
+        cursor: pointer;
+    }
+
     
     /* Variants */
     
@@ -114,6 +118,10 @@ a.text.link {
     &:hover {
         cursor: pointer;
         text-decoration: underline;
+
+        &.no-click {
+            cursor: default;
+        }
     }
     
     &.primary {

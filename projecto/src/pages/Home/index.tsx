@@ -1,35 +1,41 @@
 import React from "react";
 
-import { Text } from "@components/Text";
-
 import { useContentStore } from "@stores/useContentStore";
-import { useApplicationStore } from "@stores/useApplicationStore";
-import { usePlayerStore } from "@stores/usePlayerStore";
 
-import classes from "./index.module.css";
-import RecentCard from "@components/Card/RecentCard";
+import RecentTrackSection from "./RecentTrackSection";
+import TrackCardSection from "./TrackCardSection";
+import AlbumCardSection from "./AlbumCardSection";
 
 const HomePage = () => {
-    const getManyTrack = useContentStore(s => s.getManyTrack);
-    const applicationStore = useApplicationStore();
+    const featuredTrackIds = useContentStore((s) => s.getFeaturedTrackIds());
+    const discoverTrackIds = useContentStore((s) => s.getDiscoverTrackIds());
 
-    const recentTracks = getManyTrack(...applicationStore.recentTrackIds);
+    const getAllTrackIds = useContentStore((s) => s.getAllTrackIds);
+    const getAllAlbumIds = useContentStore((s) => s.getAllAlbumIds);
+
+    const allTrackIds = React.useMemo(() => getAllTrackIds(), [getAllTrackIds]);
+    const allAlbumIds = React.useMemo(() => getAllAlbumIds(), [getAllAlbumIds]);
+
 
     return (
         <>
-            <Text as="h1" bold>Recents</Text>
-            <div className={classes.recentSection}>
-                {recentTracks.map((t) =>
-                    <RecentCard
-                        src={t.artwork}
-                        title={t.title}
-                    />
-                )}
-            </div>
+            <RecentTrackSection />
 
             <div />
 
-            <Text as="h1" bold>Featured</Text>
+            {featuredTrackIds && <TrackCardSection title="Featured" trackIds={featuredTrackIds} loading="lazy" />}
+
+            <div />
+
+            {discoverTrackIds && <TrackCardSection title="Discover" trackIds={discoverTrackIds} loading="lazy" />}
+
+            <div />
+
+            {allTrackIds && <TrackCardSection title="All Tracks" trackIds={allTrackIds} loading="lazy" />}
+
+            <div />
+
+            {allAlbumIds && <AlbumCardSection title="All Albums" albumIds={allAlbumIds} loading="lazy" />}
         </>
     );
 };

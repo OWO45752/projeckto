@@ -6,12 +6,18 @@ import "./themes/index.css";
 
 import { useGetContentApi } from "./hooks/useApi";
 import { useContentStore } from "@stores/useContentStore";
+import { useApplicationStore } from "@stores/useApplicationStore";
 
 import Layout from "@components/Layout";
+
 import ApplicationError from "@pages/ApplicationError";
+import NotFound from "@pages/NotFound";
+
 import HomePage from "@pages/Home";
+import TrackInfoPage from "@pages/TrackInfo";
 
 function App() {
+    const loadApplicationStoreState = useApplicationStore(s => s.loadApplicationState);
     const FVX_SET_DATA = useContentStore((s) => s.FVX_SET_DATA);
     const { data, loading, error } = useGetContentApi();
 
@@ -21,6 +27,11 @@ function App() {
         }
     }, [loading, data, error, FVX_SET_DATA]);
 
+    React.useEffect(() => {
+        loadApplicationStoreState();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
     if (error) return <ApplicationError />;
 
     return (
@@ -28,6 +39,11 @@ function App() {
             <Routes>
                 <Route path="/" element={<Layout />}>
                     <Route index element={<HomePage />} />
+
+                    <Route path="tracks/:trackId" element={<TrackInfoPage />} />
+
+
+                    <Route path="*" element={<NotFound />} />
                 </Route>
             </Routes>
         </BrowserRouter>

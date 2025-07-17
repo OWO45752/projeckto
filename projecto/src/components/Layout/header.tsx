@@ -3,6 +3,7 @@ import React from "react";
 import classes from "./header.module.css";
 
 import RegularButton from "@components/Buttons/RegularButton";
+import Brand from "@components/Brand";
 
 import { IconMenu2 } from "@tabler/icons-react";
 
@@ -16,7 +17,7 @@ const LayoutHeader = (props: LayoutHeaderProps) => <div className={classes.layou
         <IconMenu2 size="1em" />
     </RegularButton>
 
-    <p className={classes.headerBrand}>MIKO</p>
+    <Brand />
 
     <div className={classes.rhs}>
         <img className={classes.profilePic} src="/placeholder-profile.png" />
