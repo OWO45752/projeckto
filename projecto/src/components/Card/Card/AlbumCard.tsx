@@ -8,6 +8,8 @@ import TrackImage from "@components/TrackImage";
 import { Text } from "@components/Text";
 
 import ArtistText from "@components/ArtistText";
+import RegularButton from "@components/Buttons/RegularButton";
+import { IconPlayerPlayFilled } from "@tabler/icons-react";
 
 interface AlbumCardProp {
     title: string;
@@ -15,6 +17,7 @@ interface AlbumCardProp {
     artistIds: string[]
     onTitleClick?: () => void;
     artLoading?: "lazy" | "eager";
+    onPlayClick: () => void;
 }
 
 const AlbumCard = (props: AlbumCardProp) => {
@@ -31,6 +34,13 @@ const AlbumCard = (props: AlbumCardProp) => {
                 <div>
                     <ArtistText artists={artists} size="lg" limit={3} />
                 </div>
+            </div>
+
+            <div className={classes.buttonContainer}>
+                <RegularButton onClick={props.onPlayClick}>
+                    <IconPlayerPlayFilled size="1em" />
+                    <span>Play</span>
+                </RegularButton>
             </div>
         </div>
     );

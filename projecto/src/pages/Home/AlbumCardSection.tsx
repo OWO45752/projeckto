@@ -7,6 +7,7 @@ import { Text } from "@components/Text";
 import { AlbumCard } from "@components/Card/Card";
 
 import classes from "./index.module.css";
+import { usePlayerStore } from "@stores/usePlayerStore";
 
 interface AlbumCardSectionProps {
     title: string;
@@ -16,6 +17,7 @@ interface AlbumCardSectionProps {
 
 const AlbumCardSection = (props: AlbumCardSectionProps) => {
     const getManyAlbum = useContentStore(s => s.getManyAlbum);
+    const playAlbum = usePlayerStore(s => s.setQueue);
 
     const navigate = useNavigate();
 
@@ -34,6 +36,7 @@ const AlbumCardSection = (props: AlbumCardSectionProps) => {
                         artLoading={props.loading}
 
                         onTitleClick={() => navigate(`/albums/${a.id}`)}
+                        onPlayClick={() => playAlbum(a.track_ids)}
                     />
                 )}
             </div>

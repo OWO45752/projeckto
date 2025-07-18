@@ -1,0 +1,58 @@
+body[theme=monokai-pro] {
+    --brand-color: #78DCE8;
+
+    --bg-primary-color: #2D2A2E;
+    --bg-secondary-color: #221F22;
+
+    --border-primary-color: #19181A;
+
+    --text-primary-color: #C1C0C0;
+    --text-secondary-color: #939293;
+
+    --scrollbar-primary-color: #4F4F4F var(--bg-primary-color);
+    --scrollbar-secondary-color: #4F4F4F var(--bg-secondary-color);
+
+    /* Button-1 */
+    --button1-bg-color-default: #221F22;
+    --button1-bg-color-hover: #2D2A2E;
+    --button1-bg-color-active: #2D2A2E;
+    --button1-bg-color-disabled: ;
+
+    --button1-border-color-default: #302E31;
+    --button1-border-color-hover: #39363A;
+    --button1-border-color-active: #4C494C;
+    --button1-border-color-disabled: #504950;
+
+    --button1-text-color-default: #939293;
+    --button1-text-color-hover: #C1C0C0;
+    --button1-text-color-active: #C1C0C0;
+    --button1-text-color-disabled: ;
+
+    /* Button-2 */
+    --button2-bg-color-default: #221F22;
+    --button2-bg-color-hover: #2D2A2D;
+    --button2-bg-color-active: #2A272A;
+    --button2-bg-color-disabled: #504950;
+
+    --button2-text-color-default: #939293;
+    --button2-text-color-hover: #C1C0C0;
+    --button2-text-color-active: #C1C0C0;
+    --button2-text-color-disabled: ;
+
+    /* Slider */
+    --slider-rail-color-default: var(--bg-primary-color);
+    --slider-track-color-default: #727072;
+    --slider-handle-color-default: transparent;
+
+    --slider-rail-color-hover: var(--bg-primary-color);
+    --slider-track-color-hover: var(--brand-color);
+    --slider-handle-color-hover: #CCCCCC;
+
+    --slider-rail-color-active: var(--bg-primary-color);
+    --slider-track-color-active: var(--brand-color);
+    --slider-handle-color-active: #CCCCCC;
+
+    --slider-rail-color-disabled: #504950;
+    --slider-track-color-disabled: #C1C0C0;
+    --slider-handle-color-disabled: transparent;
+}

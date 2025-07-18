@@ -2,21 +2,34 @@
     --k-slider-rail-color: var(--slider-rail-color-default);
     --k-slider-track-color: var(--slider-track-color-default);
     --k-slider-handle-color: var(--slider-handle-color-default);
+    --k-slider-cursor: default;
 
     &:hover {
         --k-slider-rail-color: var(--slider-rail-color-hover);
         --k-slider-track-color: var(--slider-track-color-hover);
         --k-slider-handle-color: var(--slider-handle-color-hover);
-        
-        cursor: pointer;
+        --k-slider-cursor: pointer;
+
+        cursor: var(--k-slider-cursor);
     }
 
     &:active {
         --k-slider-rail-color: var(--slider-rail-color-active);
         --k-slider-track-color: var(--slider-track-color-active);
         --k-slider-handle-color: var(--slider-handle-color-active);
+        --k-slider-cursor: pointer;
         
-        cursor: pointer;
+        cursor: var(--k-slider-cursor);
+    }
+    
+    &.rc-slider-disabled {
+        background: transparent;
+        --k-slider-rail-color: var(--slider-rail-color-disabled);
+        --k-slider-track-color: var(--slider-track-color-disabled);
+        --k-slider-handle-color: var(--slider-handle-color-disabled);
+        --k-slider-cursor: default;
+        
+        cursor: var(--k-slider-cursor);
     }
 
     .rc-slider-rail {
@@ -32,7 +45,7 @@
         background-color: var(--k-slider-handle-color);
         border: none;
         opacity: 0;
-        cursor: default;
+        cursor: var(--k-slider-cursor);
         box-shadow: none;
     }
 
@@ -45,15 +58,11 @@
     &:hover, &:active {
         .rc-slider-handle {
             opacity: 1;
-            cursor: pointer;
+            cursor: var(--k-slider-cursor);
         }
 
         .rc-slider-handle-dragging.rc-slider-handle-dragging.rc-slider-handle-dragging {
             opacity: 1;
         }
-    }
-    
-    &.rc-slider-disabled {
-        background: transparent;
     }
 }

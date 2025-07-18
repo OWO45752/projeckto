@@ -2,7 +2,8 @@ import { create } from "zustand";
 
 import { useLocalStorageStore } from "./useLocalStorage";
 
-type ThemeValues = "light";
+// eslint-disable-next-line sonarjs/redundant-type-aliases
+type ThemeValues = string;
 
 interface ApplicationStore {
     _applicationStateReady: boolean;
@@ -26,7 +27,7 @@ interface ApplicationStore {
 }
 
 const PRAM = {
-    themes: ["light", "dark"] as ThemeValues[],
+    themes: ["light", "dark", "monokai-pro"] as ThemeValues[],
 
     lsKeys: {
         theme: "WOOF__MIKO__APPLICATIONSTATE__APPLICATION_THEME",
@@ -52,8 +53,9 @@ export const useApplicationStore = create<ApplicationStore>((set, get) => ({
         get().setTheme(themes[nextIndex]);
     },
     _loadTheme: () => {
-        const theme = useLocalStorageStore.getState().get(PRAM.lsKeys.theme) as ThemeValues | null || "light";
-        set({ currentTheme: theme });
+        const theme = (useLocalStorageStore.getState().get(PRAM.lsKeys.theme) || "").trim() as ThemeValues;
+        if (theme === "") return get().setTheme("light");
+        get().setTheme(theme);
     },
 
     recentTrackIds: [],
@@ -90,6 +92,8 @@ export const useApplicationStore = create<ApplicationStore>((set, get) => ({
     //
     loadApplicationState: () => {
         const state = get();
+
+        state._loadTheme();
 
         state._loadRecentTrackIds();
 

@@ -1,8 +1,9 @@
 import csv
 from dataclasses import dataclass
 import os
+import re
 import shutil
-from typing import Optional
+from typing import Optional, Tuple
 from pathlib import Path
 import json
 
@@ -191,6 +192,38 @@ class TrackList:
 
 
 
+class Viewie:
+    def __init__(self) -> None:
+        self.vieve: dict[str, list[str]] = {}
+    
+    def add(self, view: str, id: str):
+        view = view.lower().strip()
+        view = re.sub(r"[^a-z0-9\-_]", "", view)
+
+        if not re.match(r"^[a-z][a-z0-9\-_]*$", view):
+            raise ValueError(f"Invalid view name: '{view}'. Must match pattern [a-z][a-z0-9-_]*")
+
+        if view not in self.vieve:
+            self.vieve[view] = []
+
+        if id in self.vieve[view]:
+            return
+
+        self.vieve[view].append(id)
+    
+    def get(self, view:str) -> Optional[list[str]]:
+        return self.vieve[view] or None
+    
+    def all(self) -> list[Tuple[str, list[str]]]:
+        retv: list[Tuple[str, list[str]]] = []
+
+        for k, v in self.vieve.items():
+            retv.append((k, v))
+        
+        return retv
+
+
+
 def _path_to_url(root: str, full_path: str, url_root: str = "") -> str:
     """
     Convert absolute file path to absolute URL path relative to a root.
@@ -234,6 +267,7 @@ def path_to_url(path: str, url_root: str = "") -> str:
 DATA_ARTIST_LIST = ArtistList()
 DATA_ALBUM_LIST = AlbumList()
 DATA_TRACK_LIST = TrackList()
+DATA_TRACK_VIEWIE = Viewie()
 
 ensure_dir(DATA_ROOT_PATH)
 ensure_dir(OUTPUT_ROOT_PATH)
@@ -332,6 +366,12 @@ with open(TRACKS_FILE, mode="r", encoding="utf-8") as file:
         track_inst = Track(tid, title, [x.id for x in artist_instances], genres, duration, album_id, audiofile, artfile)
         DATA_TRACK_LIST.add(track_inst)
 
+        vier = [x.strip() for x in row["VIEW"].split(",")]
+        for x in vier:
+            if x == "":
+                continue
+            DATA_TRACK_VIEWIE.add(x, tid)
+
 #endregion Parseng
 
 
@@ -407,15 +447,8 @@ for x in DATA_ARTIST_LIST.all():
 
 
 
-for r in range(1, 10):
-    x = DATA_TRACK_LIST.get_by_id(str(r))
-    if x:
-        data["v_featured"].append(x.id) # type: ignore
-
-atrack = DATA_TRACK_LIST.all()
-atrack.reverse()
-for x in atrack:
-    data["v_discover"].append(x.id) # type: ignore
+for (k, v) in DATA_TRACK_VIEWIE.all():
+    data[f"v_{k}"] = v
 
 
 

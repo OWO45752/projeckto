@@ -91,7 +91,11 @@ export const usePlayerStore = create<PlayerStore>((set, get) => ({
 
     setCurrentTime: (t) => set({ currentTime: t }),
 
-    setQueue: (trackIds: string[]) => set({ queue: trackIds }),
+    setQueue: (trackIds: string[]) => {
+        if (trackIds.length === 0) return;
+        set({ queue: trackIds });
+        get().setCurrentTrack(trackIds[0]);
+    },
     addTrackToQueue: (trackId) => {
         if (get().queue.includes(trackId)) return;
         set((s) => ({ queue: [...s.queue, trackId] }));

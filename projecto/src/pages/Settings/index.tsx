@@ -8,6 +8,7 @@ import { IconColorFilter } from "@tabler/icons-react";
 
 const SettingsPage = () => {
     const cycleTheme = useApplicationStore(s => s.cycleTheme);
+    const currentTheme = useApplicationStore(s => s.currentTheme);
 
 
     return (
@@ -17,7 +18,7 @@ const SettingsPage = () => {
 
             <SettingBarButton
                 icon={IconColorFilter}
-                text="Theme"
+                text={`Cycle Theme (Current theme: ${currentTheme})`}
                 onClick={() => cycleTheme()}
             />
         </>
