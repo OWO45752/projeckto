@@ -22,7 +22,7 @@ const LayoutHeader = (props: LayoutHeaderProps) => <div className={classes.layou
     <Brand />
 
     <div className={classes.rhs}>
-        <img className={classes.profilePic} src="/placeholder-profile.png" />
+        <img className={classes.profilePic} src="/profile.png" />
     </div>
 </div>;
 
