@@ -28,3 +28,4 @@ src/**/*.css.d.ts
 public/api/
 
 *.cache
+.firebase/
