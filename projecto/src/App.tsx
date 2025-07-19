@@ -53,7 +53,7 @@ function App() {
                     <Route path="settings" element={<SettingsPage />} />
 
 
-                    <Route path="game" element={<GameTetrisPage />} />
+                    <Route path="_/owo/tetris" element={<GameTetrisPage />} />
 
 
                     {/* */}
