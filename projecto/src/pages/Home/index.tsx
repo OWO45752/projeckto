@@ -16,7 +16,6 @@ const HomePage = () => {
     const allTrackIds = React.useMemo(() => getAllTrackIds(), [getAllTrackIds]);
     const allAlbumIds = React.useMemo(() => getAllAlbumIds(), [getAllAlbumIds]);
 
-
     return (
         <>
             <RecentTrackSection />

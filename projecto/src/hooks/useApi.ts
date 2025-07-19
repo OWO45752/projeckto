@@ -15,7 +15,7 @@ export const useGetContentApi = () => {
                 const res = await fetch("/api/index.json", { signal });
 
                 if (!res.ok) {
-                    throw new Error(`HTTP error! status: ${res.status}`);
+                    throw new Error(`HTTP status: ${res.status}`);
                 }
 
                 const fetchedData = await res.json();

@@ -1,11 +1,14 @@
 import React from "react";
 
-import classes from "./content.module.css";
-
 import { Outlet } from "react-router";
+
 import { useContentStore } from "@stores/useContentStore";
 import { useApplicationStore } from "@stores/useApplicationStore";
+
 import LayoutContentLoading from "./Loading";
+import ErrorBoundary from "@components/ErrorBoundary";
+
+import classes from "./content.module.css";
 
 
 const LayoutContent = () => {
@@ -21,7 +24,9 @@ const LayoutContent = () => {
     return (
         <div className={classes.layoutContent} woof-element--layout-name="content">
             <div className={classes.contentContainer}>
-                {isReady ? <Outlet /> : <LayoutContentLoading />}
+                <ErrorBoundary>
+                    {isReady ? <Outlet /> : <LayoutContentLoading />}
+                </ErrorBoundary>
             </div>
         </div>
     );
