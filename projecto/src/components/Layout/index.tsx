@@ -10,6 +10,7 @@ import LayoutSidebar from "./sidebar";
 import LayoutPlayer from "./Player";
 import LayoutContent from "./content";
 import ErrorBoundary from "@components/ErrorBoundary";
+import HotkeyListener from "./hotkey";
 
 
 const Layout = () => {
@@ -23,6 +24,8 @@ const Layout = () => {
                 <LayoutSidebar sidebarHidden={sidebarHidden} />
                 <LayoutContent />
                 <LayoutPlayer />
+
+                <HotkeyListener />
             </div>
         </ErrorBoundary>
     );

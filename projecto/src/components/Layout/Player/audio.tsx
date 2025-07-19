@@ -22,6 +22,7 @@ const Audio = () => {
         autoNext,
 
         volume,
+        isMute,
     } = usePlayerStore();
 
     const howlerRef = React.useRef<ReactHowler | null>(null);
@@ -83,7 +84,7 @@ const Audio = () => {
                 onEnd={() => autoNext()}
 
                 playing={isPlaying}
-                volume={volume}
+                volume={isMute ? 0 : volume}
             />
         </div>
     );

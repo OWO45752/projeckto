@@ -10,6 +10,7 @@ interface PlayerStore {
     queue: string[];
     isPlaying: boolean;
     volume: number; // 0 to 1
+    isMute: boolean;
     isShuffle: boolean;
     repeatMode: RepeatMode;
     currentTime: number; // Time in Millisec
@@ -31,6 +32,8 @@ interface PlayerStore {
     prev: () => void;
 
     setVolume: (value: number) => void;
+    setIsMute: (value: boolean) => void;
+    toggleMute: () => void;
 
     shuffle: () => void;
     toggleShuffle: () => void;
@@ -49,6 +52,7 @@ export const usePlayerStore = create<PlayerStore>((set, get) => ({
     queue: [],
     isPlaying: false,
     volume: 1,
+    isMute: false,
     isShuffle: false,
     repeatMode: "all",
     currentTime: 0,
@@ -209,6 +213,11 @@ export const usePlayerStore = create<PlayerStore>((set, get) => ({
     setVolume: (value: number) => {
         const clampedValue = Math.max(0, Math.min(1, value));
         set({ volume: clampedValue });
+    },
+    setIsMute: (value: boolean) => set({ isMute: value }),
+    toggleMute: () => {
+        const state = get();
+        return state.setIsMute(!state.isMute);
     },
 
     shuffle: () => {
