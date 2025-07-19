@@ -1,0 +1,65 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    gap: 16px;
+
+    
+
+    :global(.game-board) {
+        background: #FBFBFB;
+    }
+
+    :global(.piece-view) {
+        background: #FBFBFB;
+    }
+
+    :global(.game-block) {
+        margin: 0;
+        padding: 0;
+        width: 1.5em;
+        height: 1.5em;
+        border: 1px solid #202020;
+    }
+    
+    :global(.piece-i) {
+        background-color: #B91C1C ;
+    }
+
+    :global(.piece-j) {
+        background-color: #166534;
+    }
+
+    :global(.piece-l) {
+        background-color: #1E40AF ;
+    }
+
+    :global(.piece-o) {
+        background-color: #C2410C ;
+    }
+
+    :global(.piece-s) {
+        background-color: #7C2D92 ;
+    }
+
+    :global(.piece-t) {
+        background-color: #0F766E ;
+    }
+
+    :global(.piece-z) {
+        background-color: #766f0f ;
+    }
+
+    :global(.piece-preview) {
+        background-color: #CCCCCC;
+    }
+}
+
+
+
+.info-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}

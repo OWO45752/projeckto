@@ -19,6 +19,8 @@ import HomePage from "@pages/Home";
 import PlayQueuePage from "@pages/PlayQueue";
 import SettingsPage from "@pages/Settings";
 
+import GameTetrisPage from "@pages/Tetris";
+
 import TrackInfoPage from "@pages/TrackInfo";
 import AlbumInfoPage from "@pages/AlbumInfo";
 
@@ -49,6 +51,15 @@ function App() {
 
                     <Route path="play-queue" element={<PlayQueuePage />} />
                     <Route path="settings" element={<SettingsPage />} />
+
+
+                    <Route path="game" element={<GameTetrisPage />} />
+
+
+                    {/* */}
+
+
+                    {/* */}
 
 
                     <Route path="tracks/:trackId" element={<TrackInfoPage />} />
