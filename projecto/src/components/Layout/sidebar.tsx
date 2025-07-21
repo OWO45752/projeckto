@@ -8,6 +8,7 @@ import { SidebarNavButton } from "@components/Buttons/Sidebar";
 import {
     IconHome2,
     IconList,
+    IconSearch,
     IconSettings2
 } from "@tabler/icons-react";
 
@@ -30,6 +31,11 @@ const LayoutSidebar = (props: LayoutSidebarProps) => {
                 <SidebarNavButton to="/play-queue">
                     <IconList size="1em" />
                     Play Queue
+                </SidebarNavButton>
+
+                <SidebarNavButton to="/search">
+                    <IconSearch size="1em" />
+                    Search
                 </SidebarNavButton>
 
 
