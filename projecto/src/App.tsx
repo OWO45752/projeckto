@@ -23,6 +23,7 @@ import GameTetrisPage from "@pages/Tetris";
 
 import TrackInfoPage from "@pages/TrackInfo";
 import AlbumInfoPage from "@pages/AlbumInfo";
+import SearchPage from "@pages/Search/index";
 
 
 function App() {
@@ -51,6 +52,8 @@ function App() {
 
                     <Route path="play-queue" element={<PlayQueuePage />} />
                     <Route path="settings" element={<SettingsPage />} />
+
+                    <Route path="search" element={<SearchPage />} />
 
 
                     <Route path="_/owo/tetris" element={<GameTetrisPage />} />

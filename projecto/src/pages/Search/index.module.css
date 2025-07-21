@@ -1,0 +1,14 @@
+.sr {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    gap: .5rem;
+}
+
+.sb {
+    background: var(--bg-secondary-color);
+    padding: 0.5rem;
+    border: 1px solid var(--border-primary-color);
+    border-radius: 8px;
+}
